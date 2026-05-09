@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Clone Repo') {
+            steps {
+                git branch: 'main', url: 'https://github.com/ManojKumar-dnac/Jenkins-AI-Repo.git'
+            }
+        }
+
+        stage('Create Sample Log') {
+            steps {
+                sh '''
+                echo "ERROR: Docker build failed" > app.log
+                echo "unable to prepare context: Dockerfile not found" >> app.log
+                '''
+            }
+        }
+
+        stage('Run AI Log Analyzer') {
+            steps {
+                sh 'python3 analyze_logs.py'
+            }
+        }
+    }
+}
