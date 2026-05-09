@@ -7,7 +7,11 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/ManojKumar-dnac/Jenkins-AI-Repo.git'
             }
         }
-
+        stage ('Install Python Dependencies') {
+            steps {
+                sh 'pip3 install openai'
+            }
+        }
         stage('Create Sample Log') {
             steps {
                 sh '''
